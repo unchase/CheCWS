@@ -29,9 +29,7 @@ Global $sName = 'CheCWS.exe'
 Global $sRegRun = 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run'
 Global $denyRunTaskManager = $GUI_UNCHECKED
 Global $serv = "seclogon"
-
-
-$INIFILE = @ScriptDir & "\" & $sProgramName & ".ini"
+Global $INIFILE = @ScriptDir & "\" & $sProgramName & ".ini"
 Global $adminUser = IniRead($INIFILE, "CREDENTIALS", "user", "")
 Global $adminPassword = ""
 Global $cryptAdminPassword = ""
@@ -41,24 +39,26 @@ If $autoRun = "" Then
    RegWrite("HKEY_LOCAL_MACHINE\Software\" & $sProgramName, "AutoRun", "REG_SZ", $autoRun)
 EndIf
 
-
+; запуск службы "Вторичный вход в систему"
 Run(@ComSpec & " /c net start " & $serv, "", @SW_HIDE)
 
-
-If RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "EnableLUA") = 1 Then
-   TrayTip("Запуск программы " & $sProgramName & " " & $sProgramVersion & " с UAC", "UAC включен. Отключаем...", 3, 2)
-   If RegWrite("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "EnableLUA", "REG_DWORD", 0) Then
-	  TrayTip("Запуск программы " & $sProgramName & " " & $sProgramVersion & " с UAC", "UAC отключен.", 5, 2)
-   Else
-	  TrayTip("Запуск программы " & $sProgramName & " " & $sProgramVersion & " с UAC", "Не удалось отключить UAC. Завершение работы.", 3, 2)
-	  Sleep(3)
-	  Exit
+; пытаемся отключить UAC для Windows Vista и выше
+If _WinAPI_GetVersion() >= "6.0" Then
+   If RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "EnableLUA") = 1 Then
+	  TrayTip("Запуск программы " & $sProgramName & " " & $sProgramVersion & " с UAC", "UAC включен. Отключаем...", 3, 2)
+	  If RegWrite("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "EnableLUA", "REG_DWORD", 0) Then
+		 TrayTip("Запуск программы " & $sProgramName & " " & $sProgramVersion & " с UAC", "UAC отключен.", 5, 2)
+	  Else
+		 TrayTip("Запуск программы " & $sProgramName & " " & $sProgramVersion & " с UAC", "Не удалось отключить UAC. Завершение работы.", 3, 2)
+		 Sleep(3)
+		 Exit
+	  EndIf
    EndIf
 EndIf
 
 
 If Not IsAdmin() Then
-   ;~ окно запуска под админом
+   ;~ окно ввода данных для запуска под админом
    $wRunAsAdminWindow = GUICreate("Запуск " & $sProgramName & " v 1.0", 390, 75)
    GUICtrlCreateLabel("Имя пользователя:", 10, 5)
    $iUserName = GUICtrlCreateInput($adminUser, 10, 25, 100, Default)
@@ -81,7 +81,6 @@ If Not IsAdmin() Then
 			If RunAs($adminUser, @ComputerName, $adminPassword, 1, @ScriptFullPath & " " & @UserName & " " & $passINIRead, @ScriptDir) = 0 Then
 			   MsgBox(16, "Запуск программы " & $sProgramName & " " & $sProgramVersion, "Произошла ошибка (автоматический вход): неверно заданы имя пользователя '" & $adminUser & "' или пароль, либо не запущена служба 'seclogon' (служба вторичного входа в систему)." & @LF & "Возможно, вы пытаетесь запустить программу не под администратором." & @LF & "Проверьте, запущена ли служба 'seclogon' (служба вторичного входа в систему). Возможно, средства защиты блокируют ее запуск.")
 			Else
-;~ 			   Run("REG ADD HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\System /v DisableTaskMgr /t REG_DWORD /d 1 /f")
 			   Exit
 			EndIf
 		 EndIf
@@ -264,9 +263,7 @@ EndIf
 
 
 Global $currentWallpaper = RegRead('HKEY_CURRENT_USER\Control Panel\Desktop', 'Wallpaper')
-
 Global $imageFilesList = _FileListToArrayEx($imagesFolderPath, "*.jpg|*.bmp", 8)
-
 Global $folderTime = FileGetTime($imagesFolderPath, 0, 1)
 Global $doit = 1
 Global $hTimer = TimerInit()
