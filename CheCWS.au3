@@ -22,6 +22,7 @@
 #include <WinAPISys.au3>
 
 
+
 Global $key = "YOUR_KEY"
 Global $sProgramName = "CheCWS"
 Global $sProgramVersion = "v1.02"
@@ -558,12 +559,12 @@ Func ExitScript()
    EndIf
 EndFunc
 
-
+; открываем каталог с обоями, используемые для размещения на рабочем столе
 Func OpenWallpaperFolder()
 	run('explorer.exe /select,' & $currentWallpaper)
 EndFunc
 
-
+; сохраняем измененные значения (настройки) в реестр
 Func SaveSettingsToREG()
    $imagesFolderPath = GUICtrlRead($gImagesFolderPath)
    $stretchMode = _GUICtrlComboBox_GetCurSel($gList)
@@ -594,16 +595,16 @@ EndFunc
 
 
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: _ImageSaveToBMP
-; Description ...: Convert an image to bmp format
-; Syntax ........: _ImageSaveToBMP($sPath[, $sDestPath = @ScriptDir[, $sName = Default[, $bOverwrite = False[, $bDelOrig = False]]]])
-; Parameters ....: $sPath               - A string value.
-;                  $sDestPath           - The path where to save the converted image. Default is @ScriptDir.
-;                  $sName               - The name of the converted image. Default is the original photo name.
-;                  $bOverwrite          - Overwrite the converted file if already exist. Default is False.
-;                  $bDelOrig            - Delete the original file after conversion. Default is False.
-; Return values .: On Success - Return the new file names
-;                  On Failure -
+; Имя ...................: 	_ImageSaveToBMP
+; Описание ..............: 	Конвертирует изображение в формат bmp
+; Синтаксис .............: 	_ImageSaveToBMP($sPath[, $sDestPath = @ScriptDir[, $sName = Default[, $bOverwrite = False[, $bDelOrig = False]]]])
+; Параметры .............: 	$sPath               - A string value.
+;                  			$sDestPath           - The path where to save the converted image. Default is @ScriptDir.
+;                  			$sName               - The name of the converted image. Default is the original photo name.
+;                  			$bOverwrite          - Overwrite the converted file if already exist. Default is False.
+;                  			$bDelOrig            - Delete the original file after conversion. Default is False.
+; Возвращаемые значения .: 	On Success - Return the new file names
+;                  			On Failure -
 ;                               @error = 1 The file to be converted doesn't not exist
 ;                               @error = 2 The image is already a bmp file
 ;                               @error = 3 Invalid file extension
@@ -612,9 +613,9 @@ EndFunc
 ;                               @error = 6 The destination file already exist
 ;                               @error = 7 Unable to overwrite the destination file
 ;                               @error = 8 Unable to save the bmp file
-; Author ........: Nessie
-; Modified.......: Unchase
-; Example .......: _ImageSaveToBMP(@DesktopDir & "\nessie.jpg")
+; Автор .................: 	Nessie
+; Изменен ...............:	Unchase
+; Пример ................: _ImageSaveToBMP(@DesktopDir & "\nessie.jpg")
 ; ===============================================================================================================================
 Func _ImageSaveToBMP($sPath, $sDestPath = @ScriptDir, $sName = Default, $bOverwrite = False, $bDelOrig = False)
    Local $bCheckExt = False
@@ -680,7 +681,7 @@ Func _ImageSaveToBMP($sPath, $sDestPath = @ScriptDir, $sName = Default, $bOverwr
    Return $sDestPath & "\" & $sName & ".bmp"
 EndFunc   ;==>_ImageSaveToBMP
 
-
+; меняем размер изображения
  Func _ImageResize($sImagePath, $sOutImage, $iW, $iH)
    Local $hWnd, $hDC, $hBMP, $hImage1, $hImage2, $hGraphic, $CLSID, $i = 0, $Ext
 
