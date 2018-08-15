@@ -13,9 +13,7 @@
 
 *Скрипты для запуска в Windows XP и Windows 7, а также для отключения UAC находятся в архиве с программой.*
 
-[![Github Releases](https://img.shields.io/github/downloads/unchase/checws/latest/total.svg?style=flat-square)](https://github.com/unchase/Centurion/releases/latest)
-
-[![GitHub Release Date](https://img.shields.io/github/release-date/unchase/checws.svg?style=flat-square)](https://github.com/unchase/Centurion/releases/latest)
+[![Github Releases](https://img.shields.io/github/downloads/unchase/checws/latest/total.svg?style=flat-square)](https://github.com/unchase/Centurion/releases/latest) [![GitHub Release Date](https://img.shields.io/github/release-date/unchase/checws.svg?style=flat-square)](https://github.com/unchase/Centurion/releases/latest)
 
 ## Supported OS
 * Windows XP/Vista/7/8/8.1/10
