@@ -1,4 +1,4 @@
-![CheCWS logo](https://github.com/unchase/CheCWS/master/Images/checws_logo.png) 
+![CheCWS logo](https://github.com/unchase/CheCWS/raw/master/Images/checws_logo.png) 
 
 
 # CheCWS
