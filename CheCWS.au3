@@ -1,5 +1,5 @@
 ﻿; #INDEX# =======================================================================================================================
-; Title .........: CheCWS v1.02
+; Title .........: CheCWS v1.0.2
 ; AutoIt Version : v3.3.14.2
 ; Description ...: Программа для автоматической смены фона рабочего стола по таймеру.
 ; Author(s) .....: Unchase
@@ -25,7 +25,7 @@
 
 Global $key = "YOUR_KEY"
 Global $sProgramName = "CheCWS"
-Global $sProgramVersion = "v1.02"
+Global $sProgramVersion = "v1.0.2"
 Global $sName = 'CheCWS.exe'
 Global $sRegRun = 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run'
 Global $denyRunTaskManager = $GUI_UNCHECKED
