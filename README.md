@@ -1,8 +1,5 @@
 ![CheCWS logo](https://github.com/unchase/CheCWS/raw/master/Images/checws_logo.png) 
 
-
-# CheCWS
-
 Утилита CheCWS (Change Wallpeper Silently) предназначена для автоматической смены фона рабочего стола по таймеру (периодичность смены регулируется в настройках).
 
 Для работы программы необходимо:<br/>
