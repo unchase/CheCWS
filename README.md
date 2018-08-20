@@ -57,4 +57,5 @@
 
 ## Links
 * Issue tracker: [![GitHub issues](https://img.shields.io/github/issues/unchase/checws/shields.svg?style=flat-square)](https://github.com/unchase/checws/issues) [![GitHub issues-closed](https://img.shields.io/github/issues-closed/unchase/checws.svg?style=flat-square)](https://GitHub.com/unchase/checws/issues?q=is%3Aissue+is%3Aclosed)
+* Website: [![Website checws.unchase.ru](https://img.shields.io/website-up-down-green-red/http/checws.unchase.ru.svg?style=flat-square)](http://checws.unchase.ru/)
 * Wiki: <a href="https://github.com/unchase/checws/wiki" rel="nofollow" target="_blank"><img src="https://img.shields.io/badge/Wiki-go-blue.svg?style=flat-square" alt="Github Wiki"></a>
